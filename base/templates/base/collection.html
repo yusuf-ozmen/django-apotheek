@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Collection{% endblock title %}
+
+{% block content %}
+  <h2>My Collection</h2>
+  <ul>
+    {% for collection in collections %}
+      <li>
+        <strong>{{ collection.medicine.name }}</strong> -
+        {% if collection.collected %}
+            Picked up
+        {% else %}
+          {% if collection.collectedapproved %}
+            Wait for approval
+          {% else %}
+            Not collected
+          {% endif %}
+          (<a href="{% url 'sign_collected' collection.id %}" class="sign-collected-btn">Mark as collected</a>)
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock content %}
