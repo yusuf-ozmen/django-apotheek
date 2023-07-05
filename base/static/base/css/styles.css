@@ -1,0 +1,89 @@
+body {
+    background-color: rgb(193, 233, 255);
+    margin: 0;
+    
+}
+
+.menu {
+    display: flex;
+    background-color: aqua;
+    height: 4rem;
+    align-items: center;
+    text-align: left;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.button {
+    padding-left: 2rem;
+    font-size: 16px;
+}
+
+.button:hover {
+    text-decoration: underline;
+}
+
+.content {
+    margin: 1rem;
+}
+
+.messages {
+    width: fit-content;
+    background-color: rgb(168, 255, 81);
+    border: 2px solid green;
+    padding: 10px;
+    margin: 10px;
+}
+
+.profile-form {
+    max-width: 300px;
+}
+  
+.profile-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.profile-form input,
+.profile-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.profile-form .submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.profile-form .submit-btn:hover {
+    background-color: #45a049;
+}
+
+.sign-collected-btn {
+    display: inline-block;
+    padding: 1px 3px;
+    background-color: #4caf50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0px;
+  }
+  
+  .sign-collected-btn:hover {
+    background-color: #439547;
+  }
+  
+  .sign-collected-btn:active {
+    background-color: #438645;
+  }
+  
