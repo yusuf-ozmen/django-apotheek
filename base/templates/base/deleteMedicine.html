@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Delete Medicine{% endblock title %}
+
+{% block content %}
+  <h2>Delete Medicine</h2>
+  <p>Are you sure you want to delete the medicine: <strong>"{{ medicine.name }}"</strong></p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="button">Delete</button>
+  </form>
+{% endblock content %}

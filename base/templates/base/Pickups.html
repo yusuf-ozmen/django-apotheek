@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Pickups{% endblock title %}
+
+{% block content %}
+  <h2>Pickups</h2>
+
+  <a href="{% url 'create_pickup' %}" class="button add">Add Pickup</a>
+  <br>
+  <br>
+
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Medicine</th>
+        <th>Date</th>
+        <th>Collected</th>
+        <th>Approved</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pickup in pickups %}
+        <tr>
+          <td>{{ pickup.user }}</td>
+          <td>{{ pickup.medicine }}</td>
+          <td>{{ pickup.date }}</td>
+          <td>{% if pickup.collected %} Yes {% else %} No {% endif %}</td>
+          <td>{% if pickup.collectedapproved %} Yes {% else %} No {% endif %}</td>
+          <td>
+            {% if not pickup.collectedapproved and pickup.collected %}
+              <a href="{% url 'approve_pickup' pickup.id %}" class="button edit">Approve</a>
+            {% endif %}
+            <a href="{% url 'delete_pickup' pickup.id %}" class="button delete">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Medicines{% endblock title %}
+
+{% block content %}
+  <h2>Medicines</h2>
+  
+  <a href="{% url 'create_medicine' %}" class="button add">Add Medicine</a>
+  <br>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Factory</th>
+        <th>Cures</th>
+        <th>Side effects</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for medicine in medicines %}
+        <tr>
+          <td>{{ medicine.name }}</td>
+          <td>{{ medicine.manufacturer }}</td>
+          <td>{{ medicine.cures }}</td>
+          <td>{{ medicine.side_effects }}</td>
+          <td>
+            <a href="{% url 'edit_medicine' medicine.id %}" class="button edit">Edit</a>
+            <a href="{% url 'delete_medicine' medicine.id %}" class="button delete">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

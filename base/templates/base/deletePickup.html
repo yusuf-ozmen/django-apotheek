@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Delete Pickup{% endblock title %}
+
+{% block content %}
+  <h2>Delete Pickup</h2>
+  <p>Are you sure you want to delete the pickup</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="button">Delete</button>
+  </form>
+{% endblock content %}
