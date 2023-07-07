@@ -56,11 +56,82 @@ def collection(request):
 def sign_collected(request, collection_id):
     collection = Collection.objects.get(pk=collection_id)
 
-    if collection.collectedapproved:
-        collection.collected = True
-        collection.save()
-        messages.success(request, 'Medicine marked as collected.')
-    else:
-        messages.error(request, 'Medicine must first be approved by an admin.')
+    collection.collected = True
+    collection.save()
+    messages.success(request, 'Medicine marked as collected.')
 
     return redirect('collection')
+
+@staff_member_required
+def medicines(request):
+    medicines = Medicine.objects.all()
+    return render(request, 'base/medicines.html', {'medicines': medicines})
+
+@staff_member_required
+def create_medicine(request):
+    if request.method == 'POST':
+        form = MedicineForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Medicine created.")
+            return redirect('medicines')
+    else:
+        form = MedicineForm()
+    return render(request, 'base/create_medicine.html', {'form': form})
+
+@staff_member_required
+def edit_medicine(request, id):
+    medicine = Medicine.objects.get(pk=id)
+    if request.method == 'POST':
+        form = MedicineForm(request.POST, instance=medicine)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Medicine edited.")
+            return redirect('medicines')
+    else:
+        form = MedicineForm(instance=medicine)
+    return render(request, 'base/edit_medicine.html', {'form': form})
+
+@staff_member_required
+def delete_medicine(request, id):
+    medicine = Medicine.objects.get(pk=id)
+    if request.method == 'POST':
+        medicine.delete()
+        messages.success(request, "Medicine deleted.")
+        return redirect('medicines')
+    return render(request, 'base/delete_medicine.html', {'medicine': medicine})
+
+@staff_member_required
+def pickups(request):
+    pickups = Collection.objects.all()
+    return render(request, 'base/pickups.html', {'pickups': pickups})
+
+@staff_member_required
+def create_pickup(request):
+    if request.method == 'POST':
+        form = CollectionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Pick up created.")
+            return redirect('pickups')
+    else:
+        form = CollectionForm()
+    return render(request, 'base/create_pickup.html', {'form': form})
+
+@staff_member_required
+def approve_pickup(request, id):
+    pickup = Collection.objects.get(pk=id)
+    pickup.collectedapproved = True
+    pickup.collectedapproved_by = request.user
+    pickup.save()
+    messages.success(request, "Pick up approved.")
+    return redirect('pickups')
+
+@staff_member_required
+def delete_pickup(request, id):
+    pickup = Collection.objects.get(pk=id)
+    if request.method == 'POST':
+        pickup.delete()
+        messages.success(request, "Pick up deleted.")
+        return redirect('pickups')
+    return render(request, 'base/delete_pickup.html', {'pickup': pickup})

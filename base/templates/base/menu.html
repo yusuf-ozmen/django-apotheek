@@ -1,18 +1,18 @@
 {% load static %}
 <div class="menu">
-    <div class="button">
+    <div class="item">
         <img src="{% static 'base/images/4924866-medische-apotheek-logo-sjabloon-vector.jpg' %}" alt="apotheek" width="33"></a></div>
         {% if user.is_authenticated %}
-        <div class="button"><a href="{% url 'index' %}">Home</a></div>
-        <div class="button"><a href="{% url 'profile' %}">Profile</a></div>
-        <div class="button"><a href="{% url 'collection' %}">Collection</a></div>
+        <div class="item"><a href="{% url 'index' %}">Home</a></div>
+        <div class="item"><a href="{% url 'profile' %}">Profile</a></div>
+        <div class="item"><a href="{% url 'collection' %}">Collection</a></div>
         {% if user.is_staff %}
-            <div class="button">Pick ups</a></div>
-            <div class="button">Medicine</a></div>
+            <div class="item"><a href="{% url 'pickups' %}">Pick ups</a></div>
+            <div class="item"><a href="{% url 'medicines' %}">Medicine</a></div>
         {% endif %}
-        <div class="button"><a href="{% url 'logout' %}">Logout</a></div>
+        <div class="item"><a href="{% url 'logout' %}">Logout</a></div>
     {% else %}
-        <div class="button"><a href="{% url 'login' %}">Login</a></div>
-        <div class="button"><a href="{% url 'register' %}">Register</a></div>
+        <div class="item"><a href="{% url 'login' %}">Login</a></div>
+        <div class="item"><a href="{% url 'register' %}">Register</a></div>
     {% endif %}
 </div>

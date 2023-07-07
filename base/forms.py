@@ -13,7 +13,7 @@ class MedicineForm(forms.ModelForm):
 class CollectionForm(forms.ModelForm):
     class Meta:
         model = Collection
-        fields = ("medicine", "date")
+        fields = ("medicine", "date", "user", "collected")
 
 class ProfileForm(forms.ModelForm):
     class Meta:
