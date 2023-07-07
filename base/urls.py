@@ -17,4 +17,5 @@ urlpatterns = [
     path('pickups/create/', views.create_pickup, name='create_pickup'),
     path('pickups/approve/<int:id>/', views.approve_pickup, name='approve_pickup'),
     path('pickups/delete/<int:id>/', views.delete_pickup, name='delete_pickup'),
+    path('change_password/', views.change_password, name='change_password'),
 ]

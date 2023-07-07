@@ -2,12 +2,14 @@ import datetime
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import Profile, Medicine, Collection
-from .forms import NameForm, MedicineForm, CollectionForm, ProfileForm
+from .forms import MedicineForm, CollectionForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 # Create your views here.
 
@@ -135,3 +137,18 @@ def delete_pickup(request, id):
         messages.success(request, "Pick up deleted.")
         return redirect('pickups')
     return render(request, 'base/delete_pickup.html', {'pickup': pickup})
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'base/change_password.html', {'form': form})

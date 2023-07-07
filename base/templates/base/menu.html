@@ -6,6 +6,7 @@
         <div class="item"><a href="{% url 'index' %}">Home</a></div>
         <div class="item"><a href="{% url 'profile' %}">Profile</a></div>
         <div class="item"><a href="{% url 'collection' %}">Collection</a></div>
+        <div class="item"><a href="{% url 'change_password' %}">Change Password</a></div>
         {% if user.is_staff %}
             <div class="item"><a href="{% url 'pickups' %}">Pick ups</a></div>
             <div class="item"><a href="{% url 'medicines' %}">Medicine</a></div>

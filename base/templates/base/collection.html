@@ -7,15 +7,13 @@
   {% if collections %}
     <ul>
       {% for collection in collections %}
-        <li>
-          <strong>{{ collection.medicine.name }}</strong> -
-          {% if collection.collected %}
-              Picked up
-          {% else %}
-              Not collected
+        {% if not collection.collected %}
+          <li style="padding-bottom:0.3rem">
+            <strong>{{ collection.medicine.name }}</strong> from <strong>{{ collection.medicine.manufacturer }}</strong> -
+            Not collected
             (<a href="{% url 'sign_collected' collection.id %}" class="sign-collected-btn">Mark as collected</a>)
-          {% endif %}
-        </li>
+          </li>
+        {% endif %}
       {% endfor %}
     </ul>
   {% else %}
